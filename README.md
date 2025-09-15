@@ -33,15 +33,16 @@ This project explores and implements deep learning algorithms for the analysis o
 
 ```
 Dravet-Syndrome-Deep-Learning-Work/
-├── data/                # Instructions for obtaining data (see below)
-├── CNN + LSTM/          # Scripts and notebooks for CNN + LSTM models
-├── lstm gru/            # Scripts and notebooks for LSTM-GRU models
-├── lstm/                # Scripts and notebooks for LSTM models
-├── notebooks/           # Jupyter notebooks for exploratory analysis and modeling
-├── scripts/             # Python scripts for data processing, model training, and evaluation
-├── models/              # Saved models and checkpoints
-├── utils/               # Utility functions and helper modules
-├── requirements.txt     # List of package dependencies
+├── 1. CNN + LSTM/           # CNN + LSTM model notebook and trained model
+│   ├── deep-learning-cnn-lstm-v4.ipynb
+│   └── trained_model.h5
+├── 2. LSTM/                 # LSTM model notebook and trained model
+│   ├── lstm-v1.ipynb
+│   └── trained_model_lstm_fc.h5
+├── 3. LSTM + GRU/           # LSTM-GRU model notebook and trained model
+│   ├── deep-learninglstm-gru-v1.ipynb
+│   └── trained_model_lstm_gru.h5
+├── requirements.txt         # List of package dependencies
 ├── LICENSE
 └── README.md
 ```
@@ -79,47 +80,74 @@ Dravet-Syndrome-Deep-Learning-Work/
 
 1. **Data Preparation:**
    - Download the data using the link provided in `data/README.md` and follow the instructions there to place it correctly.
-   - Use provided scripts in the `scripts/` or notebooks in `notebooks/` for preprocessing.
-
-2. **Model Training:**
-   - There are three main model directories:
-     - `CNN + LSTM/`
-     - `lstm gru/`
-     - `lstm/`
-   - Refer to the scripts and notebooks within each directory for training different architectures.
-
-   - Example command to train a model:
-     ```bash
-     python scripts/train.py --config configs/model_config.yaml
-     ```
-   - You can adjust parameters via the config files or command-line arguments.
-
-3. **Evaluation:**
-   - Run evaluation scripts to reproduce quantitative results:
-     ```bash
-     python scripts/evaluate.py --model models/best_model.pth
+   - Each notebook contains data preprocessing steps within the notebook itself.
+   - **Important:** You need to adjust the data paths in each notebook according to your local setup:
+     ```python
+     # Example paths that need to be updated in notebooks:
+     control_folder = '/kaggle/input/my-dataset/Dataset/Control EEG'
+     ds_folder = '/kaggle/input/my-dataset/Dataset/DS cases'
+     
+     # Update these paths to match your local data directory structure
      ```
 
-4. **Visualization:**
-   - Use Jupyter notebooks in the `notebooks/` directory for exploratory data analysis and visualizations.
+2. **Model Training and Evaluation:**
+   Each directory contains a complete Jupyter notebook with the full pipeline:
+   
+   - **CNN + LSTM Model:** Open and run `1. CNN + LSTM/deep-learning-cnn-lstm-v4.ipynb`
+   - **LSTM Model:** Open and run `2. LSTM/lstm-v1.ipynb`
+   - **LSTM + GRU Model:** Open and run `3. LSTM + GRU/deep-learninglstm-gru-v1.ipynb`
 
-5. **Kaggle Notebooks:**
-   - Recently added Kaggle notebooks are included in the repository.  
-   - **Note:** You need to manually run these notebooks after obtaining the data as per the instructions above.
+   Each notebook includes:
+   - Data loading and preprocessing
+   - Model architecture definition
+   - Training pipeline with hyperparameters
+   - Model evaluation and metrics
+   - Visualization of results
+   - Model saving/loading functionality
 
-6. **Reproducing the Pipeline:**
-   - Step-by-step instructions for reproduction are provided in `notebooks/` and the main scripts.
-   - All random seeds are set where applicable to ensure reproducibility.
+3. **Using Pre-trained Models:**
+   - Each directory contains a pre-trained model file (`.h5` format)
+   - Load the models directly in the notebooks or use them for inference
+   - Model loading code is included within each respective notebook
+
+4. **Running the Notebooks:**
+   ```bash
+   # Start Jupyter notebook server
+   jupyter notebook
+   
+   # Navigate to the desired model directory and open the notebook
+   # Before running: Update data folder paths in the notebook cells
+   # Run all cells to reproduce the complete pipeline
+   ```
+
+5. **Path Configuration:**
+   - Before running any notebook, locate the data path variables and update them:
+     ```python
+     # Find these lines in each notebook and update paths:
+     control_folder = 'your/local/path/to/Dataset/Control EEG'
+     ds_folder = 'your/local/path/to/Dataset/DS cases'
+     ```
 
 ---
 
 ## Reproducibility Guidelines
 
-- All code, including preprocessing, training, and evaluation, is included and documented.
-- The code is version controlled and all dependencies are specified in `requirements.txt`.
-- Scripts are modular and annotated for clarity.
-- Results in the paper can be reproduced following the instructions above.
-- For any issues, see [Contact](#contact).
+- **Complete Pipeline in Notebooks:** Each Jupyter notebook contains the entire pipeline from data loading to model evaluation, ensuring full reproducibility.
+- **Pre-trained Models:** Trained models are included in each directory for immediate use and result verification.
+- **Environment Setup:** All dependencies are specified in `requirements.txt` with version constraints.
+- **Self-contained Notebooks:** Each notebook is designed to be run independently with all necessary code included.
+- **Random Seeds:** Random seeds are set within each notebook to ensure reproducible results.
+- **Step-by-step Execution:** Notebooks are organized with clear cell-by-cell execution for easy reproduction.
+
+**To Reproduce Results:**
+1. Set up the environment using `requirements.txt`
+2. Obtain the data as per instructions
+3. Open any of the three model notebooks
+4. **Update data folder paths** in the notebook cells to match your local setup
+5. Run all cells sequentially
+6. Compare results with the pre-trained models provided
+
+**For any issues with reproduction, see [Contact](#contact).**
 
 ---
 
@@ -131,31 +159,15 @@ All dependencies are listed in `requirements.txt`. Main dependencies include:
 - NumPy
 - pandas
 - scikit-learn
-- PyTorch or TensorFlow (depending on the model)
-- matplotlib or seaborn
+- TensorFlow/Keras
+- matplotlib
+- seaborn
 - jupyter
 
 Install all dependencies with:
 
 ```bash
 pip install -r requirements.txt
-```
-
----
-
-## requirements.txt Example
-
-Below is a template for the `requirements.txt` file.  
-**Update the version numbers and packages as necessary for your specific environment:**
-
-```
-numpy>=1.18.0
-pandas>=1.0.0
-scikit-learn>=0.22.0
-torch>=1.7.0        # or tensorflow>=2.0.0 if you are using TensorFlow
-matplotlib>=3.1.0
-seaborn>=0.10.0
-jupyter
 ```
 
 ---
@@ -171,7 +183,7 @@ You are free to use, modify, and redistribute the code with appropriate attribut
 
 For questions, clarifications, or requests for data access, please contact:
 
-- **Sikandarh11** (Repository Owner)  
+- **Sikandar Hussain** (Repository Owner)  
   GitHub: [Sikandarh11](https://github.com/Sikandarh11)  
   Email: sikandarnust1140@gmail.com
 
