@@ -70,10 +70,11 @@ Dravet-Syndrome-Deep-Learning-Work/
 
 ## Data Availability
 
-> **Note:** Due to privacy/ethical restrictions, raw data are not included in this repository.  
-> The `data/` folder will contain a README with a link to download the data from Google Drive.  
-> Anyone with the link will be able to download the data. Please follow the instructions in `data/README.md` to access and prepare the data for use.
-
+> **Note:** Due to privacy and ethical restrictions, the raw EEG data (EDF files) used in this study are **not** publicly available in this repository.  
+> The `data/` folder contains a `Data.md` file with detailed instructions and a **Google Form link** to request access to the data.  
+> Access is granted on a case-by-case basis in accordance with institutional guidelines and patient confidentiality requirements.  
+> Please follow the instructions in `data/Data.md` to submit a data access request. If your request is approved, the corresponding author will provide secure, private access to the EEG data files.
+> 
 ---
 
 ## Usage Instructions
